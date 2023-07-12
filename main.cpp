@@ -78,12 +78,12 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(600, 800), "Gagalaga");
 	window.setFramerateLimit(60);
 	Texture mapTex;
-	mapTex.loadFromFile("D:/Downloaded/My projects/Project/Bombarino/Image/sky.jpg");
+	mapTex.loadFromFile("Image/sky.jpg");
 	Sprite mapSprite;
 	mapSprite.setTexture(mapTex);
 	Clock clock;
 	Font font;
-	font.loadFromFile("D:/Downloaded/My projects/Project/Bombarino/Font/ALGER.TTF");
+	font.loadFromFile("Font/ALGER.TTF");
 
 	int hell = 0;
 	int berserk = 0;
@@ -96,21 +96,21 @@ int main()
 
 
 	Texture enemyTex;
-	enemyTex.loadFromFile("D:/Downloaded/My projects/Project/Bombarino/Image/wasp.png");
+	enemyTex.loadFromFile("Image/wasp.png");
 	std::vector<Enemy>enemies;
 
 	Texture shootingEnemyTex;
-	shootingEnemyTex.loadFromFile("D:/Downloaded/My projects/Project/Bombarino/Image/enemy.png");
+	shootingEnemyTex.loadFromFile("Image/enemy.png");
 	std::vector<ShootEnemy>shootEnemies;
 	
 	Texture bulletTex;
-	bulletTex.loadFromFile("D:/Downloaded/My projects/Project/Bombarino/Image/missile.png");
+	bulletTex.loadFromFile("Image/missile.png");
 	Texture projectileTex;
-	projectileTex.loadFromFile("D:/Downloaded/My projects/Project/Bombarino/Image/projectile.png");
+	projectileTex.loadFromFile("Image/projectile.png");
 
 
 	Texture playerTex;
-	playerTex.loadFromFile("D:/Downloaded/My projects/Project/Bombarino/Image/ship.png");
+	playerTex.loadFromFile("Image/ship.png");
 	Player player(&playerTex);
 	player.shape.setPosition(window.getSize().x / static_cast<float>(2), window.getSize().y);
 
@@ -156,7 +156,7 @@ int main()
 			hell1 = 150;
 			berserk = 30;
 
-			//Управление//
+			//РЈРїСЂР°РІР»РµРЅРёРµ//
 			if (Keyboard::isKeyPressed(Keyboard::W))
 			{
 				player.shape.move(0.f, -6.f);
@@ -174,13 +174,13 @@ int main()
 				player.shape.move(-6.f, 0.f);
 			}
 
-			//Отображение здоровья и счета//
+			//РћС‚РѕР±СЂР°Р¶РµРЅРёРµ Р·РґРѕСЂРѕРІСЊСЏ Рё СЃС‡РµС‚Р°//
 			hpText.setPosition(0, 0);
 			hpText.setString("Health " + std::to_string(player.HP) + "%");
 			score.setPosition(150, 0);
 			score.setString("Score " + std::to_string(Score));
 
-			//Взаимодействие с картой//
+			//Р’Р·Р°РёРјРѕРґРµР№СЃС‚РІРёРµ СЃ РєР°СЂС‚РѕР№//
 			if (player.shape.getPosition().x <= 0)
 			{
 				player.shape.setPosition(0.f, player.shape.getPosition().y);
@@ -198,7 +198,7 @@ int main()
 				player.shape.setPosition(player.shape.getPosition().x, window.getSize().y - player.shape.getGlobalBounds().height);
 			}
 
-			//Стрельба//
+			//РЎС‚СЂРµР»СЊР±Р°//
 			if (Keyboard::isKeyPressed(Keyboard::Space) && shootTimer >= berserk)
 			{
 				player.bullets.push_back(Bullet(&bulletTex, player.shape.getPosition()));
@@ -209,19 +209,19 @@ int main()
 				shootTimer++;
 			}
 
-			//Кароч просто че там пули делают на карте//
+			//РљР°СЂРѕС‡ РїСЂРѕСЃС‚Рѕ С‡Рµ С‚Р°Рј РїСѓР»Рё РґРµР»Р°СЋС‚ РЅР° РєР°СЂС‚Рµ//
 			for (size_t i = 0; i < player.bullets.size(); i++)
 			{
-				//Движение пуль//
+				//Р”РІРёР¶РµРЅРёРµ РїСѓР»СЊ//
 				player.bullets[i].shape.move(0.f, -8.5f);
 
-				//Удаление пуль//
+				//РЈРґР°Р»РµРЅРёРµ РїСѓР»СЊ//
 				if (player.bullets[i].shape.getPosition().y > window.getSize().y)
 				{
 					player.bullets.erase(player.bullets.begin() + i);
 				}
 
-				//Удаление пуль и противников при контакте друг с другом//
+				//РЈРґР°Р»РµРЅРёРµ РїСѓР»СЊ Рё РїСЂРѕС‚РёРІРЅРёРєРѕРІ РїСЂРё РєРѕРЅС‚Р°РєС‚Рµ РґСЂСѓРі СЃ РґСЂСѓРіРѕРј//
 				for (size_t j = 0; j < shootEnemies.size(); j++)
 				{
 					if (player.bullets[i].shape.getGlobalBounds().intersects(shootEnemies[j].shape.getGlobalBounds()))
@@ -233,7 +233,7 @@ int main()
 					}
 				}
 			}
-			//Удаление пуль и противников при контакте друг с другом//
+			//РЈРґР°Р»РµРЅРёРµ РїСѓР»СЊ Рё РїСЂРѕС‚РёРІРЅРёРєРѕРІ РїСЂРё РєРѕРЅС‚Р°РєС‚Рµ РґСЂСѓРі СЃ РґСЂСѓРіРѕРј//
 			for (size_t i = 0; i < player.bullets.size(); i++)
 			{
 				for (size_t j = 0; j < enemies.size(); j++)
@@ -268,8 +268,8 @@ int main()
 			}
 
 		}
-		//Движение противников и их удаление(при контакте с игроком и вылете за пределы карты)//
-		//Обычные камикадзе//
+		//Р”РІРёР¶РµРЅРёРµ РїСЂРѕС‚РёРІРЅРёРєРѕРІ Рё РёС… СѓРґР°Р»РµРЅРёРµ(РїСЂРё РєРѕРЅС‚Р°РєС‚Рµ СЃ РёРіСЂРѕРєРѕРј Рё РІС‹Р»РµС‚Рµ Р·Р° РїСЂРµРґРµР»С‹ РєР°СЂС‚С‹)//
+		//РћР±С‹С‡РЅС‹Рµ РєР°РјРёРєР°РґР·Рµ//
 		for (size_t i = 0; i < enemies.size(); i++)
 		{
 			enemies[i].shape.move(0.f, 4.5f);
@@ -292,13 +292,13 @@ int main()
 		window.draw(hpText);
 		window.draw(score);
 
-		//Отрисока пуль//
+		//РћС‚СЂРёСЃРѕРєР° РїСѓР»СЊ//
 		for (size_t i = 0; i < player.bullets.size(); i++)
 		{
 			window.draw(player.bullets[i].shape);
 		}
 
-		//Отрисовка противнков//
+		//РћС‚СЂРёСЃРѕРІРєР° РїСЂРѕС‚РёРІРЅРєРѕРІ//
 		for (size_t i = 0; i < shootEnemies.size(); i++)
 		{
 			window.draw(shootEnemies[i].shape);
@@ -308,14 +308,14 @@ int main()
 			window.draw(enemies[i].shape);
 		}
 
-		//Стреляющие противники//
+		//РЎС‚СЂРµР»СЏСЋС‰РёРµ РїСЂРѕС‚РёРІРЅРёРєРё//
 		for (size_t i = 0; i < shootEnemies.size(); i++)
 		{
 			shootEnemies[i].shape.move(0.f, 2.5f);
 			if (shootEnemies[i].shape.getPosition().y>=150)
 			{
 				shootEnemies[i].shape.move(0.f, -2.5f);
-				//Задаем параметры вектору(пулям противника)//
+				//Р—Р°РґР°РµРј РїР°СЂР°РјРµС‚СЂС‹ РІРµРєС‚РѕСЂСѓ(РїСѓР»СЏРј РїСЂРѕС‚РёРІРЅРёРєР°)//
 				if (EnemyShootTimer>=250)
 				{
 					shootEnemies[i].EnemyProjectile.push_back(EnemyBullet(&projectileTex, shootEnemies[i].shape.getPosition()));
@@ -325,7 +325,7 @@ int main()
 				{
 					EnemyShootTimer++;
 				}
-				//Отрисовка, удаление, взаимодействие с игроком//
+				//РћС‚СЂРёСЃРѕРІРєР°, СѓРґР°Р»РµРЅРёРµ, РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёРµ СЃ РёРіСЂРѕРєРѕРј//
 				for (size_t j = 0; j < shootEnemies[i].EnemyProjectile.size(); j++)
 				{
 					window.draw(shootEnemies[i].EnemyProjectile[j].shape);
